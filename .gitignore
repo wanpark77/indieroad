@@ -1,0 +1,26 @@
+# Backend
+backend/.gradle/
+backend/build/
+backend/*.db
+backend/*.mv.db
+backend/*.trace.db
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env
+frontend/.env*.local
+frontend/*.tsbuildinfo
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
