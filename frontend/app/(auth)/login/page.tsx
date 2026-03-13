@@ -21,7 +21,11 @@ export default function LoginPage() {
       const data = await login({ email, password })
       localStorage.setItem("token", data.accessToken)
       localStorage.setItem("user", JSON.stringify({ nickname: data.nickname, role: data.role, userId: data.userId }))
-      router.push("/")
+      if (data.role === "ADMIN") {
+        router.push("/admin")
+      } else {
+        router.push("/")
+      }
     } catch (err: unknown) {
       console.error(err)
       setError(err instanceof Error ? err.message : "로그인에 실패했습니다.")
