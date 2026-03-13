@@ -3,5 +3,5 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "java -Xms256m -Xmx384m -Dspring.profiles.active=prod -Dserver.port=8080 -Dspring.datasource.url=jdbc:postgresql://postgres.railway.internal:5432/railway -Dspring.datasource.username=postgres -Dspring.datasource.password=TKsioxrYOiZskFMexTRvEfegLacxZtlB -jar app.jar"
+startCommand = "java -Xms256m -Xmx384m -Dspring.profiles.active=prod -Dserver.port=8080 -Dspring.datasource.url=jdbc:postgresql://postgres.railway.internal:5432/railway -Dspring.datasource.username=postgres -Dspring.datasource.password=TKsioxrYOiZskFMexTRvEfegLacxZtlB -Djwt.secret=aW5kaXJvYWQtc3VwZXItc2VjcmV0LWtleS1mb3ItaW5kaXJvYWQtYmFja2VuZC0yMDI0LXYx -Dupload.base-url=https://indieroad-production.up.railway.app -jar app.jar"
 restartPolicyType = "on_failure"
