@@ -16,10 +16,7 @@ spring:
     hibernate:
       ddl-auto: create-drop
     defer-datasource-initialization: true
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+    show-sql: false
   sql:
     init:
       mode: always
@@ -30,7 +27,7 @@ upload:
 
 jwt:
   secret: aW5kaXJvYWQtc3VwZXItc2VjcmV0LWtleS1mb3ItaW5kaXJvYWQtYmFja2VuZC0yMDI0LXYx
-  expiration: 86400000  # 24 hours in milliseconds
+  expiration: 3600000  # 1 hour in milliseconds
 
 springdoc:
   api-docs:
@@ -44,5 +41,5 @@ springdoc:
 
 logging:
   level:
-    com.indiroad: DEBUG
-    org.springframework.security: DEBUG
+    com.indiroad: INFO
+    org.springframework.security: WARN

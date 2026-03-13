@@ -45,4 +45,12 @@ public class MagazineService {
         article.setViews(article.getViews() + 1);
         return MagazineArticleResponse.from(article);
     }
+
+    @Transactional
+    public int toggleLike(String slug) {
+        MagazineArticle article = magazineRepository.findBySlug(slug)
+                .orElseThrow(() -> new EntityNotFoundException("아티클을 찾을 수 없습니다."));
+        article.setLikes(article.getLikes() + 1);
+        return article.getLikes();
+    }
 }

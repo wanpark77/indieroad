@@ -31,7 +31,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(12);
     }
 
     @Bean
@@ -63,6 +63,7 @@ public class SecurityConfig {
                 // Public endpoints
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/magazine/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/magazine/*/like").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/feedback/tracks/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/feedback/tracks/*/submissions").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/store-promo").permitAll()

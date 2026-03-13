@@ -1,6 +1,7 @@
 package com.indiroad.user.controller;
 
 import com.indiroad.common.ApiResponse;
+import com.indiroad.user.dto.ChangePasswordRequest;
 import com.indiroad.user.dto.PointsResponse;
 import com.indiroad.user.dto.UpdateProfileRequest;
 import com.indiroad.user.dto.UserProfileResponse;
@@ -35,6 +36,15 @@ public class UserController {
             @AuthenticationPrincipal Long userId,
             @RequestBody UpdateProfileRequest request) {
         return ResponseEntity.ok(ApiResponse.ok("프로필이 수정되었습니다.", userService.updateProfile(userId, request)));
+    }
+
+    @PutMapping("/password")
+    @Operation(summary = "비밀번호 변경")
+    public ResponseEntity<ApiResponse<Void>> changePassword(
+            @AuthenticationPrincipal Long userId,
+            @RequestBody ChangePasswordRequest request) {
+        userService.changePassword(userId, request.getCurrentPassword(), request.getNewPassword());
+        return ResponseEntity.ok(ApiResponse.ok("비밀번호가 변경되었습니다.", null));
     }
 
     @GetMapping("/points")

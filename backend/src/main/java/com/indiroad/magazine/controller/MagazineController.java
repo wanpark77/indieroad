@@ -34,4 +34,11 @@ public class MagazineController {
             @PathVariable String slug) {
         return ResponseEntity.ok(ApiResponse.ok(magazineService.getArticleBySlug(slug)));
     }
+
+    @PostMapping("/{slug}/like")
+    @Operation(summary = "매거진 좋아요")
+    public ResponseEntity<ApiResponse<Integer>> like(@PathVariable String slug) {
+        int likes = magazineService.toggleLike(slug);
+        return ResponseEntity.ok(ApiResponse.ok("좋아요가 반영되었습니다.", likes));
+    }
 }

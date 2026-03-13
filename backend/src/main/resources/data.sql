@@ -3,13 +3,14 @@
 -- ============================================================
 
 -- Users (비밀번호: password123 -> BCrypt 해시)
-INSERT INTO users (email, password, nickname, role, points, artist_name, artist_link, created_at) VALUES
-('listener@indiroad.com',  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '음악리스너',  'LISTENER',     0,    NULL,          NULL,                        NOW()),
-('artist1@indiroad.com',   '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '새벽감성',    'ARTIST',    1500, '새벽감성',    'https://soundcloud.com/dawn-vibes',  NOW()),
-('artist2@indiroad.com',   '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '도시의소음',  'ARTIST',     800, '도시의소음',  'https://soundcloud.com/city-noise',  NOW()),
-('artist3@indiroad.com',   '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '숲속의선율',  'ARTIST',    2200, '숲속의선율',  'https://instagram.com/forest-melody', NOW()),
-('pro@indiroad.com',       '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '음악프로',    'PROFESSIONAL', 5000, NULL,        NULL,                        NOW()),
-('admin@indiroad.com',    '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '관리자',      'ADMIN',           0, NULL,        NULL,                        NOW());
+INSERT INTO users (email, password, nickname, name, phone, role, points, artist_name, artist_link, created_at) VALUES
+('listener@indiroad.com',  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '음악리스너',  '김리스너', '01011111111', 'LISTENER',     0,    NULL,          NULL,                        NOW()),
+('artist1@indiroad.com',   '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '새벽감성',    '이새벽',   '01022222222', 'ARTIST',    1500, '새벽감성',    'https://soundcloud.com/dawn-vibes',  NOW()),
+('artist2@indiroad.com',   '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '도시의소음',  '박도시',   '01033333333', 'ARTIST',     800, '도시의소음',  'https://soundcloud.com/city-noise',  NOW()),
+('artist3@indiroad.com',   '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '숲속의선율',  '최숲속',   '01044444444', 'ARTIST',    2200, '숲속의선율',  'https://instagram.com/forest-melody', NOW()),
+('pro@indiroad.com',       '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '음악프로',    '정프로',   '01055555555', 'PROFESSIONAL', 5000, NULL,        NULL,                        NOW()),
+('admin@indiroad.com',     '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lB7i', '관리자',      '관리자',   '01099999999', 'ADMIN',           0, NULL,        NULL,                        NOW()),
+('superadmin@indiroad.com', '$2y$12$VuZXYRCYdyLecGKGYLNqw.RSwvpE2.igfXZj8Q8Jkv3GxRn4ZI2xq', '슈퍼관리자', '슈퍼관리자', '01088888888', 'ADMIN',           0, NULL,        NULL,                        NOW());
 
 -- Magazine Articles
 INSERT INTO magazine_articles (slug, title, category, category_label, summary, cover_color, author, date, views, likes, comments_count, content) VALUES

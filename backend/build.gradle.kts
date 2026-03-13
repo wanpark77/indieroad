@@ -33,8 +33,11 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 
-    // H2 Database
+    // H2 Database (로컬 개발용)
     runtimeOnly("com.h2database:h2")
+
+    // PostgreSQL (운영용)
+    runtimeOnly("org.postgresql:postgresql")
 
     // SpringDoc OpenAPI (Swagger UI)
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")

@@ -4,6 +4,7 @@ import com.indiroad.user.entity.User;
 import com.indiroad.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,27 +18,26 @@ public class AdminInitializer implements ApplicationRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Value("${admin.email:admin@indiroad.com}")
+    private String adminEmail;
+
+    @Value("${admin.password:Admin@1234}")
+    private String adminPassword;
+
     @Override
     public void run(ApplicationArguments args) {
-        String adminEmail = "admin@indiroad.com";
         if (!userRepository.existsByEmail(adminEmail)) {
             User admin = User.builder()
                     .email(adminEmail)
-                    .password(passwordEncoder.encode("admin1234"))
+                    .password(passwordEncoder.encode(adminPassword))
                     .nickname("관리자")
+                    .name("관리자")
+                    .phone("01000000000")
                     .role(User.Role.ADMIN)
                     .points(0)
                     .build();
             userRepository.save(admin);
-            log.info("어드민 계정 생성 완료: {}", adminEmail);
-        } else {
-            // 기존 계정 비밀번호/역할 강제 업데이트
-            userRepository.findByEmail(adminEmail).ifPresent(user -> {
-                user.setPassword(passwordEncoder.encode("admin1234"));
-                user.setRole(User.Role.ADMIN);
-                userRepository.save(user);
-                log.info("어드민 계정 업데이트 완료: {}", adminEmail);
-            });
+            log.info("관리자 계정 생성 완료: {}", adminEmail);
         }
     }
 }

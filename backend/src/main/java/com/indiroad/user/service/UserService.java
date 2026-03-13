@@ -7,6 +7,7 @@ import com.indiroad.user.entity.User;
 import com.indiroad.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -17,6 +18,7 @@ import org.springframework.util.StringUtils;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserProfileResponse getProfile(Long userId) {
         User user = findUserById(userId);
@@ -35,6 +37,18 @@ public class UserService {
             user.setNickname(request.getNickname());
         }
 
+        if (StringUtils.hasText(request.getRole())) {
+            try {
+                User.Role newRole = User.Role.valueOf(request.getRole().toUpperCase());
+                if (newRole == User.Role.ADMIN) {
+                    throw new IllegalArgumentException("변경할 수 없는 역할입니다.");
+                }
+                user.setRole(newRole);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("올바르지 않은 역할입니다.");
+            }
+        }
+
         if (request.getArtistName() != null) {
             user.setArtistName(request.getArtistName());
         }
@@ -44,6 +58,15 @@ public class UserService {
         }
 
         return UserProfileResponse.from(user);
+    }
+
+    @Transactional
+    public void changePassword(Long userId, String currentPassword, String newPassword) {
+        User user = findUserById(userId);
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new IllegalArgumentException("현재 비밀번호가 올바르지 않습니다.");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
     }
 
     public PointsResponse getPoints(Long userId) {
