@@ -11,9 +11,4 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-Xms256m", "-Xmx384m", \
-  "-Dspring.profiles.active=prod", \
-  "-Dspring.datasource.url=jdbc:postgresql://postgres.railway.internal:5432/railway", \
-  "-Dspring.datasource.username=postgres", \
-  "-Dspring.datasource.password=TKsioxrYOiZskFMexTRvEfegLacxZtlB", \
-  "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Xms256m", "-Xmx384m", "-Dspring.profiles.active=prod", "-Dspring.datasource.url=jdbc:postgresql://postgres.railway.internal:5432/railway", "-Dspring.datasource.username=postgres", "-Dspring.datasource.password=TKsioxrYOiZskFMexTRvEfegLacxZtlB", "-jar", "app.jar"]
