@@ -9,7 +9,7 @@ import {
   Calendar,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { getMagazine, type MagazineArticle } from "@/lib/api/magazine"
+import { getMagazine, likeMagazine, type MagazineArticle } from "@/lib/api/magazine"
 
 export default function MagazineDetailPage({
   params,
@@ -20,12 +20,14 @@ export default function MagazineDetailPage({
   const [article, setArticle] = useState<MagazineArticle | null>(null)
   const [loading, setLoading] = useState(true)
   const [liked, setLiked] = useState(false)
+  const [likeCount, setLikeCount] = useState(0)
 
   useEffect(() => {
     const fetchArticle = async () => {
       try {
         const data = await getMagazine(slug)
         setArticle(data)
+        setLikeCount(data.likes)
       } catch (err) {
         console.error(err)
       } finally {
@@ -100,11 +102,21 @@ export default function MagazineDetailPage({
         <Button
           variant={liked ? "default" : "outline"}
           size="sm"
-          onClick={() => setLiked(!liked)}
+          onClick={async () => {
+            if (liked) return
+            try {
+              const newCount = await likeMagazine(slug)
+              setLikeCount(newCount)
+              setLiked(true)
+            } catch (err) {
+              console.error(err)
+            }
+          }}
           className="gap-1.5"
+          disabled={liked}
         >
           <Heart className={`h-4 w-4 ${liked ? "fill-current" : ""}`} />
-          {liked ? article.likes + 1 : article.likes}
+          {likeCount}
         </Button>
       </div>
     </div>

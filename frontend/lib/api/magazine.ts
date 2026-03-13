@@ -51,3 +51,8 @@ export async function updateMagazine(id: number, data: AdminMagazineRequest): Pr
 export async function deleteMagazine(id: number): Promise<void> {
   await del<void>(`/api/admin/magazine/${id}`)
 }
+
+export async function likeMagazine(slug: string): Promise<number> {
+  const res = await post<number>(`/api/magazine/${slug}/like`)
+  return res.data
+}

@@ -13,8 +13,14 @@ export interface UserProfile {
 
 export interface UpdateProfileRequest {
   nickname?: string
+  role?: string
   artistName?: string
   artistLink?: string
+}
+
+export interface ChangePasswordRequest {
+  currentPassword: string
+  newPassword: string
 }
 
 export interface PointsResponse {
@@ -29,6 +35,10 @@ export async function getMe(): Promise<UserProfile> {
 export async function updateProfile(data: UpdateProfileRequest): Promise<UserProfile> {
   const res = await put<UserProfile>("/api/me/profile", data)
   return res.data
+}
+
+export async function changePassword(data: ChangePasswordRequest): Promise<void> {
+  await put("/api/me/password", data)
 }
 
 export async function getPoints(): Promise<PointsResponse> {

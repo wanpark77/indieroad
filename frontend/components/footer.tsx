@@ -57,6 +57,12 @@ export function Footer() {
                 개인정보처리방침
               </Link>
               <Link
+                href="/marketing"
+                className="text-sm text-foreground/80 hover:text-primary"
+              >
+                마케팅 수신 동의
+              </Link>
+              <Link
                 href="/contact"
                 className="text-sm text-foreground/80 hover:text-primary"
               >
